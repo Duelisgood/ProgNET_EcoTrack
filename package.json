@@ -1,0 +1,19 @@
+{
+  "name": "uts_ecotrack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init:tailwind": "tailwindcss init -p",
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {  
+    "tailwindcss": "^3.4.3",  
+    "postcss": "^8.4.38",
+    "autoprefixer": "^10.4.19"
+  }
+}

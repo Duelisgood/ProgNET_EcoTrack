@@ -1,0 +1,11 @@
+# .gitignore
+
+# Node modules: Folder ini akan diinstal ulang oleh teman Anda
+/node_modules
+
+# Output CSS: File ini dibuat otomatis oleh Tailwind
+/dist
+
+# Log npm
+npm-debug.log*
+npm-error.log*
