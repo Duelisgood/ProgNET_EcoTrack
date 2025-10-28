@@ -84,4 +84,22 @@ document.addEventListener("DOMContentLoaded", function() {
         navContainer.addEventListener('mouseleave', hideHighlighter);
     }
 
+    if (document.getElementById('map')) {
+        // Tentukan lokasi (Universitas Udayana, Jimbaran)
+        // Koordinat: [-8.7913, 115.1668]
+        var map = L.map('map').setView([-8.7913, 115.1668], 16); 
+
+        // Tambahkan Tile Layer (Peta dasar dari OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Tambahkan Marker merah
+        var marker = L.marker([-8.7964, 115.1765]).addTo(map);
+        
+        // Tambahkan Popup pada marker
+        marker.bindPopup("<b>Universitas Udayana-Teknologi Informasi</b>").openPopup();
+    }
+
 }); 
