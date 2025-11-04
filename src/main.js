@@ -101,4 +101,37 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-}); 
+const animatedElements = document.querySelectorAll('[data-animate="fade-up"]');
+
+    // 2. Siapkan opsi untuk 'observer'
+    const observerOptions = {
+        root: null, // 'null' berarti mengamati viewport
+        rootMargin: '0px',
+        threshold: 0.1 // Trigger saat 10% elemen terlihat
+    };
+
+    // 3. Buat fungsi 'callback' yang akan dijalankan saat elemen terlihat
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            // Cek apakah elemennya sekarang terlihat (intersecting)
+            if (entry.isIntersecting) {
+                // Tambahkan kelas animasi Anda
+                entry.target.classList.add('animate-fade-up');
+                
+                // (Opsional) Hapus opacity-0 jika perlu, 
+                // tapi animasi 'forwards' Anda harusnya sudah menanganinya
+                entry.target.classList.remove('opacity-0'); 
+
+                // Hentikan pengamatan elemen ini agar animasi tidak berulang
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    // 4. Buat 'observer' baru
+    const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+    // 5. Mulai amati setiap elemen
+    animatedElements.forEach(el => scrollObserver.observe(el));
+    
+});
