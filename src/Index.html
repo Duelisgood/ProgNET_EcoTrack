@@ -18,6 +18,9 @@
         #map {
             height: 400px;
         }
+        html{
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 
@@ -44,8 +47,8 @@
                         class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full hover:text-white">Services</a>
                     <a href="#about"
                         class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full hover:text-white">Tentang Kami</a>
-                    <a href="#contact"
-                        class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full hover:text-white">Kontak</a>
+                    <a href="#report"
+                        class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full hover:text-white">Laporkan</a>
                     <a href="login.html" id="login-btn"
                         class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full text-yellow-500 hover:text-white">Login</a>
                 </div>
@@ -126,7 +129,7 @@
     </section>
 
     <!-- ============================== Laporkan Section ============================== -->
-    <div class="bg-green-900 mt-9 opacity-0" data-animate="fade-up">
+    <div class="bg-green-900 mt-9 opacity-0" id="report" data-animate="fade-up">
         <div class="max-w-6xl mx-auto px-4 py-20 md:py-24">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-13 items-center">
                 <div>
@@ -151,7 +154,7 @@
     
 
     <!-- ============================== Stats Section ============================== -->
-    <section class="flex justify-center mt-10 pb-10 opacity-0" data-animate="fade-up">
+    <section class="flex justify-center mt-10 pb-10 opacity-0" id="about" data-animate="fade-up">
         <div class="relative w-[90%] max-w-6xl flex rounded-xl overflow-hidden">
             <div class="flex-1 bg-green-900 flex justify-end items-center py-14 px-16 rounded-xl">
                 <div class="flex space-x-20 text-white">
@@ -180,7 +183,7 @@
         </div>
     </section>
 <!-- ============================== Daerah Section ============================== -->
-    <section class="py-20 bg-green-900">
+    <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 items-center">
         
@@ -195,17 +198,17 @@
                 style="background-image: url('Img/Daerah4.png'); background-position: left center;"></div>
         </div>
 
-        <div class="bg-white p-8 rounded-2xl shadow-2xl flex flex-col justify-center w-full lg:w-96 ml-auto">
-            <h2 class="text-2xl md:text-3xl font-bold text-green-900 mb-3">
+        <div class="bg-green-900 p-8 rounded-2xl shadow-2xl flex flex-col justify-center w-full lg:w-96 ml-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">
             Daerah-Daerah Yang Sudah Kami Bersihkan
             </h2>
-            <p class="text-gray-700 text-sm md:text-base mb-6">
+            <p class="text-gray-300 text-sm md:text-base mb-6">
             Beberapa daerah di sekitar yang sudah dilaporkan oleh pengguna dan dibersihkan oleh staff kami.
             Selanjutnya giliran anda segera laporkan daerah-daerah disekitarmu!
             </p>
             <a href="#"
-            class="border-2 border-green-900 text-green-900 font-semibold px-6 py-2 rounded-full hover:bg-green-900 hover:text-white transition-colors duration-300 w-fit self-start">
-            LAPOR
+             class="block mt-10 bg-yellow-500 text-white font-bold px-8 py-3 rounded-full w-fit hover:bg-yellow-400 text-lg shadow-lg shadow-yellow-500/50">
+             Laporkan
             </a>
         </div>
 
@@ -213,6 +216,48 @@
     </div>
     </section>
 
+    <footer class="bg-green-950 py-12" id="contact">
+    <div class="max-w-6xl mx-auto px-4 text-white">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+            <div>
+                <h3 class="text-2xl font-bold mb-4">EcoTrack</h3>
+                <p class="text-sm text-gray-400">Platform pelaporan dan aksi cepat untuk lingkungan yang lebih bersih.</p>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-yellow-500">Tautan Cepat</h4>
+                <ul class="space-y-2">
+                    <li><a href="#services" class="text-sm hover:text-yellow-500 transition-colors">Layanan</a></li>
+                    <li><a href="#about" class="text-sm hover:text-yellow-500 transition-colors">Tentang Kami</a></li>
+                    <li><a href="#report" class="text-sm hover:text-yellow-500 transition-colors">Laporkan Sampah</a></li>
+                    <li><a href="#contact" class="text-sm hover:text-yellow-500 transition-colors">Kontak</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-yellow-500">Layanan Kami</h4>
+                <ul class="space-y-2">
+                    <li><a href="#report" class="text-sm hover:text-yellow-500 transition-colors">Laporan Cepat</a></li>
+                    <li><a href="#about" class="text-sm hover:text-yellow-500 transition-colors">Aksi Pembersihan</a></li>
+                    <li><a href="#" class="text-sm hover:text-yellow-500 transition-colors">Transparansi Data</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-yellow-500">Hubungi Kami</h4>
+                <p class="text-sm text-gray-400">Fakultas Teknik, Kampus Jimbaran</p>
+                <p class="text-sm text-gray-400 mt-2">Email: info@ecotrack.id</p>
+                <p class="text-sm text-gray-400">Telp: (0361) 123456</p>
+            </div>
+
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-green-800 text-center">
+            <p class="text-sm text-gray-500">&copy; 2025 EcoTrack. Semua hak dilindungi.</p>
+        </div>
+    </div>
+</footer>
 
 <!-- POP UP-->
  <div id="report-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
