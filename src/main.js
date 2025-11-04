@@ -134,4 +134,71 @@ const animatedElements = document.querySelectorAll('[data-animate="fade-up"]');
     // 5. Mulai amati setiap elemen
     animatedElements.forEach(el => scrollObserver.observe(el));
     
+    const openModalBtn = document.getElementById('open-modal-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const reportModal = document.getElementById('report-modal');
+    const modalOverlay = document.getElementById('modal-overlay'); // Ambil overlay
+    
+    // Ambil konten modal
+    const modalFormContent = document.getElementById('modal-form-content');
+    const modalSuccessContent = document.getElementById('modal-success-content');
+    
+    // Ambil form
+    const reportForm = document.getElementById('report-form');
+
+    if (reportModal) {
+        
+        // Fungsi untuk membuka modal
+        const openModal = () => {
+            reportModal.classList.remove('hidden');
+        };
+
+        // Fungsi untuk menutup modal (dan RESET)
+        const closeModal = () => {
+            reportModal.classList.add('hidden');
+            
+            // PENTING: Reset tampilan modal saat ditutup
+            modalSuccessContent.classList.add('hidden'); // Sembunyikan sukses
+            modalFormContent.classList.remove('hidden'); // Tampilkan form lagi
+        };
+
+        // Event listener untuk tombol buka
+        if (openModalBtn) {
+            openModalBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Mencegah link <a> pindah halaman
+                openModal();
+            });
+        }
+
+        // Event listener untuk tombol tutup (X)
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
+        
+        // Event listener untuk overlay (klik di luar)
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', closeModal);
+        }
+        
+        // ===============================================
+        // === LOGIKA BARU: Menangani Submit Form ===
+        // ===============================================
+        if (reportForm) {
+            reportForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // SANGAT PENTING: Mencegah reload halaman
+                
+                // Di sini Anda bisa menambahkan kode untuk
+                // 1. Mengambil data form (new FormData(reportForm))
+                // 2. Mengirimnya ke backend (fetch(...))
+                
+                // Kita akan simulasi sukses
+                console.log("Formulir dikirim!");
+
+                // Ganti tampilan modal
+                modalFormContent.classList.add('hidden'); // Sembunyikan form
+                modalSuccessContent.classList.remove('hidden'); // Tampilkan "Terima Kasih"
+            });
+        }
+    }
+
 });
