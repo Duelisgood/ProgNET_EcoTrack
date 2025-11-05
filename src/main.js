@@ -101,76 +101,64 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // === Bagian 5: Animate ===
 const animatedElements = document.querySelectorAll('[data-animate="fade-up"]');
 
-    // 2. Siapkan opsi untuk 'observer'
     const observerOptions = {
-        root: null, // 'null' berarti mengamati viewport
+        root: null, 
         rootMargin: '0px',
-        threshold: 0.1 // Trigger saat 10% elemen terlihat
+        threshold: 0.1 
     };
 
-    // 3. Buat fungsi 'callback' yang akan dijalankan saat elemen terlihat
     const observerCallback = (entries, observer) => {
         entries.forEach(entry => {
-            // Cek apakah elemennya sekarang terlihat (intersecting)
+ 
             if (entry.isIntersecting) {
-                // Tambahkan kelas animasi Anda
+
                 entry.target.classList.add('animate-fade-up');
-                
-                // (Opsional) Hapus opacity-0 jika perlu, 
-                // tapi animasi 'forwards' Anda harusnya sudah menanganinya
+
                 entry.target.classList.remove('opacity-0'); 
 
-                // Hentikan pengamatan elemen ini agar animasi tidak berulang
                 observer.unobserve(entry.target);
             }
         });
     };
 
-    // 4. Buat 'observer' baru
     const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
 
-    // 5. Mulai amati setiap elemen
     animatedElements.forEach(el => scrollObserver.observe(el));
     
+     // === Bagian 6: Laporkan PopUp ===
     const openModalBtn = document.getElementById('open-modal-btn');
     const closeModalBtn = document.getElementById('close-modal-btn');
     const reportModal = document.getElementById('report-modal');
     const modalOverlay = document.getElementById('modal-overlay'); // Ambil overlay
     
-    // Ambil konten modal
     const modalFormContent = document.getElementById('modal-form-content');
     const modalSuccessContent = document.getElementById('modal-success-content');
     
-    // Ambil form
     const reportForm = document.getElementById('report-form');
 
     if (reportModal) {
         
-        // Fungsi untuk membuka modal
         const openModal = () => {
             reportModal.classList.remove('hidden');
         };
 
-        // Fungsi untuk menutup modal (dan RESET)
         const closeModal = () => {
             reportModal.classList.add('hidden');
             
-            // PENTING: Reset tampilan modal saat ditutup
-            modalSuccessContent.classList.add('hidden'); // Sembunyikan sukses
-            modalFormContent.classList.remove('hidden'); // Tampilkan form lagi
+            modalSuccessContent.classList.add('hidden'); 
+            modalFormContent.classList.remove('hidden'); 
         };
 
-        // Event listener untuk tombol buka
         if (openModalBtn) {
             openModalBtn.addEventListener('click', (e) => {
-                e.preventDefault(); // Mencegah link <a> pindah halaman
+                e.preventDefault(); 
                 openModal();
             });
         }
 
-        // Event listener untuk tombol tutup (X)
         if (closeModalBtn) {
             closeModalBtn.addEventListener('click', closeModal);
         }
@@ -180,23 +168,14 @@ const animatedElements = document.querySelectorAll('[data-animate="fade-up"]');
             modalOverlay.addEventListener('click', closeModal);
         }
         
-        // ===============================================
-        // === LOGIKA BARU: Menangani Submit Form ===
-        // ===============================================
         if (reportForm) {
             reportForm.addEventListener('submit', (e) => {
-                e.preventDefault(); // SANGAT PENTING: Mencegah reload halaman
-                
-                // Di sini Anda bisa menambahkan kode untuk
-                // 1. Mengambil data form (new FormData(reportForm))
-                // 2. Mengirimnya ke backend (fetch(...))
-                
-                // Kita akan simulasi sukses
+                e.preventDefault(); 
+
                 console.log("Formulir dikirim!");
 
-                // Ganti tampilan modal
-                modalFormContent.classList.add('hidden'); // Sembunyikan form
-                modalSuccessContent.classList.remove('hidden'); // Tampilkan "Terima Kasih"
+                modalFormContent.classList.add('hidden'); 
+                modalSuccessContent.classList.remove('hidden'); 
             });
         }
     }
