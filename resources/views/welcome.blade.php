@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack Landing Page</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <style>
+        .bg-hero-image {
+            background-image: url('Img/City.png');
+        }
+        #map {
+            height: 400px;
+        }
+        html{
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+
+
+    <div class="relative h-screen bg-hero-image bg-cover bg-fixed bg-center">
+        <div class="absolute inset-0 bg-black/60"></div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-2 h-full flex flex-col [text-shadow:0_2px_4px_rgba(0,0,0,0.3)]">
+
+
+            <nav
+                class="w-full max-w-4xl mx-auto mt-6 bg-green-900/90 text-white rounded-full px-8 py-5 flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold [text-shadow:0_2px_4px_rgba(0,0,0,0.3)]">EcoTrack</a>
+
+                <div class="hidden md:flex items-center space-x-6 font-semibold relative" id="nav-links-container">
+
+                    <span id="nav-highlighter"
+                        class="absolute bg-yellow-500 rounded-full h-full transition-all duration-300 ease-in-out shadow-lg shadow-yellow-500/50"
+                        style="left: 0; width: 0; opacity: 0;"></span>
+
+                    <a href="#services"
+                        class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full hover:text-white">Services</a>
+                    <a href="#about"
+                        class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full hover:text-white">Tentang Kami</a>
+                    <a href="#report"
+                        class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full hover:text-white">Laporkan</a>
+                    @if (Route::has('login'))
+    @auth
+        <a href="{{ url('/dashboard') }}"
+           class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full text-yellow-500 hover:text-white">
+           Dashboard
+        </a>
+    @else
+        <a href="{{ route('login') }}"
+           class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full text-yellow-500 hover:text-white">
+           Log in
+        </a>
+
+        @if (Route::has('register'))
+            <a href="{{ route('register') }}"
+               class="nav-link relative z-10 px-5 py-2 uppercase text-sm rounded-full text-yellow-500 hover:text-white">
+               Register
+            </a>
+        @endif
+    @endauth
+@endif
+                </div>
+                
+
+
+                <div class="md:hidden">
+                    <button class="text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+            
+
+
+            <div class="flex-grow flex flex-col justify-center text-white max-w-3xl">
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight [text-shadow:0_2px_4px_rgba(0,0,0,0.3)]">
+                    Lihat. Laporkan.<br>Bersihkan.
+                </h1>
+                <p class="mt-4 text-xl md:text-2xl h-16 md:h-auto">
+                    <span id="dynamic-text"></span>
+                </p>
+
+                <a href="#about"
+                    class="mt-8 bg-yellow-500 text-white font-bold px-8 py-3 rounded-full w-fit hover:bg-yellow-400 text-lg shadow-lg shadow-yellow-500/50">
+                    Tentang Kami
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== Service Section ============================== -->
+    <section class="py-20 bg-white opacity-0" id="services" data-animate="fade-up">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="mb-10">
+                <p class="text-green-900 text-lg font-normal">EcoTrack</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-green-900 leading-tight">Services</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-gray-300 h-full">
+                    <h3 class="text-4xl font-bold text-green-900 mb-3">Laporan Cepat</h3>
+                    <p class="text-lg text-gray-700">
+                        Temukan dan Laporkan. Hanya dalam 30 detik, Anda memetakan lokasi sampah liar. Memberikan detail
+                        deskripsi, dan mengunggah foto. Laporan Anda langsung muncul di peta interaktif.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-gray-300 h-full">
+                    <h3 class="text-4xl font-bold text-green-900 mb-3">Kami Datang</h3>
+                    <p class="text-lg text-gray-700">
+                        Setelah laporan diverifikasi di sistem, tim relawan atau mitra kebersihan terdekat kami menerima
+                        notifikasi dan segera menuju lokasi.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-gray-300 h-full">
+                    <h3 class="text-4xl font-bold text-green-900 mb-3">Kami Bersihkan</h3>
+                    <p class="text-lg text-gray-700">
+                        Tim kami melakukan pembersihan lokasi secara menyeluruh, memastikan sampah ditangani dengan
+                        tepat, dan memulihkan kondisi lingkungan.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-gray-300 h-full">
+                    <h3 class="text-4xl font-bold text-green-900 mb-3">Kami Beritahu</h3>
+                    <p class="text-lg text-gray-700">
+                        Setelah lokasi sepenuhnya bersih, kami memberikan notifikasi update kepada Anda beserta foto
+                        sebelum dan sesudah.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== Laporkan Section ============================== -->
+    <div class="bg-green-900 mt-9 opacity-0" id="report" data-animate="fade-up">
+        <div class="max-w-6xl mx-auto px-4 py-20 md:py-24">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-13 items-center">
+                <div>
+                    <p class="text-lg font-semibold text-white">EcoTrack</p>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight">Daerah Yang Ingin
+                        Dilaporkan</h2>
+                    <p class="mt-4 text-lg text-white">
+                        Anda dapat melaporkan daerah yang memiliki banyak sampah liar di sini.
+                    </p>
+                    <a href="#" id="open-modal-btn"
+                        class="block mt-10 bg-yellow-500 text-white font-bold px-8 py-3 rounded-full w-fit hover:bg-yellow-400 text-lg shadow-lg shadow-yellow-500/50">
+                        Laporkan
+                    </a>
+                </div>
+                <div>
+                    <div id="map" class="h-96 w-full rounded-lg shadow-lg border"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- ============================== Stats Section ============================== -->
+    <section class="flex justify-center mt-10 pb-10 opacity-0" id="about" data-animate="fade-up">
+        <div class="relative w-[90%] max-w-6xl flex rounded-xl overflow-hidden">
+            <div class="flex-1 bg-green-900 flex justify-end items-center py-14 px-16 rounded-xl">
+                <div class="flex space-x-20 text-white">
+                    <div class="text-center">
+                        <h3 class="text-3xl font-semibold text-[#fbbf24]">400+</h3>
+                        <p class="text-base font-normal">Area Yang Sudah Dibersihkan</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-3xl font-semibold text-[#fbbf24]">3+</h3>
+                        <p class="text-base font-normal">Tahun Pengalaman</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-3xl font-semibold text-[#fbbf24]">100+</h3>
+                        <p class="text-base font-normal">Staff Yang Bekerja</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="absolute top-0 left-0 h-full bg-green-800 text-white px-14 py-10 flex flex-col justify-center rounded-xl shadow-lg w-[30%]">
+                <p class="text-sm font-normal">EcoTrack</p>
+                <h2 class="text-xl font-semibold leading-tight">
+                    Yang Sudah Kami Capai Sejauh Ini
+                </h2>
+            </div>
+        </div>
+    </section>
+<!-- ============================== Daerah Section ============================== -->
+    <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 items-center">
+        
+        <div class="lg:col-span-2 grid grid-cols-2 gap-10">
+            <div class="w-100 h-60 rounded-lg shadow-xl bg-cover bg-center"
+                style="background-image: url('Img/Daerah1.png'); background-position: top center;"></div>
+            <div class="w-100 h-60 rounded-lg shadow-xl bg-cover bg-center"
+                style="background-image: url('Img/Daerah2.png'); background-position: center center;"></div>
+            <div class="w-100 h-60 rounded-lg shadow-xl bg-cover bg-center" 
+                style="background-image: url('Img/Daerah3.png'); background-position: bottom center;"></div>
+            <div class="w-100 h-60 rounded-lg shadow-xl bg-cover bg-center" 
+                style="background-image: url('Img/Daerah4.png'); background-position: left center;"></div>
+        </div>
+
+        <div class="bg-green-900 p-8 rounded-2xl shadow-2xl flex flex-col justify-center w-full lg:w-96 ml-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">
+            Daerah-Daerah Yang Sudah Kami Bersihkan
+            </h2>
+            <p class="text-gray-300 text-sm md:text-base mb-6">
+            Beberapa daerah di sekitar yang sudah dilaporkan oleh pengguna dan dibersihkan oleh staff kami.
+            Selanjutnya giliran anda segera laporkan daerah-daerah disekitarmu!
+            </p>
+            <a href="#report"
+             class="block mt-10 bg-yellow-500 text-white font-bold px-8 py-3 rounded-full w-fit hover:bg-yellow-400 text-lg shadow-lg shadow-yellow-500/50">
+             Laporkan
+            </a>
+        </div>
+
+        </div>
+    </div>
+    </section>
+
+    <footer class="bg-green-950 py-12" id="contact">
+    <div class="max-w-6xl mx-auto px-4 text-white">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+            <div>
+                <h3 class="text-2xl font-bold mb-4">EcoTrack</h3>
+                <p class="text-sm text-gray-400">Platform pelaporan dan aksi cepat untuk lingkungan yang lebih bersih.</p>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-yellow-500">Tautan Cepat</h4>
+                <ul class="space-y-2">
+                    <li><a href="#services" class="text-sm hover:text-yellow-500 transition-colors">Layanan</a></li>
+                    <li><a href="#about" class="text-sm hover:text-yellow-500 transition-colors">Tentang Kami</a></li>
+                    <li><a href="#report" class="text-sm hover:text-yellow-500 transition-colors">Laporkan Sampah</a></li>
+                    <li><a href="#contact" class="text-sm hover:text-yellow-500 transition-colors">Kontak</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-yellow-500">Layanan Kami</h4>
+                <ul class="space-y-2">
+                    <li><a href="#report" class="text-sm hover:text-yellow-500 transition-colors">Laporan Cepat</a></li>
+                    <li><a href="#about" class="text-sm hover:text-yellow-500 transition-colors">Aksi Pembersihan</a></li>
+                    <li><a href="#" class="text-sm hover:text-yellow-500 transition-colors">Transparansi Data</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-yellow-500">Hubungi Kami</h4>
+                <p class="text-sm text-gray-400">Fakultas Teknik, Kampus Jimbaran</p>
+                <p class="text-sm text-gray-400 mt-2">Email: info@ecotrack.id</p>
+                <p class="text-sm text-gray-400">Telp: (0361) 123456</p>
+            </div>
+
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-green-800 text-center">
+            <p class="text-sm text-gray-500">&copy; 2025 EcoTrack. Semua hak dilindungi.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- POP UP-->
+ <div id="report-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+    
+    <div id="modal-overlay" class="absolute inset-0 bg-black/60"></div>
+    
+    <div class="relative bg-white w-full max-w-lg p-6 rounded-lg shadow-lg m-4">
+        
+        <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        
+        <div id="modal-form-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Laporkan Sampah</h3>
+            
+            <form id="report-form" class="space-y-4">
+                <div>
+                    <label for="lokasi" class="block text-sm font-medium text-gray-700">Lokasi/Keterangan</label>
+                    <input type="text" id="lokasi" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Mis: Dekat Warung Robert Jr.">
+                </div>
+                
+                <div>
+                    <label for="foto" class="block text-sm font-medium text-gray-700">Unggah Foto</label>
+                    <input type="file" id="foto" class="mt-1 block w-full text-sm text-gray-500
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:bg-green-100 file:text-green-700 hover:file:bg-green-200"/>
+                </div>
+                
+                <button type="submit" class="w-full bg-green-700 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-800">
+                    KIRIM LAPORAN
+                </button>
+            </form>
+        </div> <div id="modal-success-content" class="hidden text-center py-8">
+            <h3 class="text-2xl font-bold text-green-700 mb-4">Terima Kasih!</h3>
+            <p class="text-lg text-gray-700">Laporan Anda telah terkirim.</p>
+            <p class="text-sm text-gray-500 mt-2">Anda bisa menutup jendela ini.</p>
+        </div> 
+        
+    </div> </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+
+</body>
+
+</html>
