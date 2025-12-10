@@ -70,8 +70,6 @@
 @endif
                 </div>
                 
-
-
                 <div class="md:hidden">
                     <button class="text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -290,18 +288,28 @@
         <div id="modal-form-content">
             <h3 class="text-2xl font-bold text-gray-900 mb-4">Laporkan Sampah</h3>
             
-            <form id="report-form" class="space-y-4">
+            <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                @csrf <div>
+                    <label for="location" class="block text-sm font-medium text-gray-700">Lokasi</label>
+                    <input type="text" name="location" id="location" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" 
+                        placeholder="Mis: Dekat Warung Robert Jr.">
+                </div>
+
                 <div>
-                    <label for="lokasi" class="block text-sm font-medium text-gray-700">Lokasi/Keterangan</label>
-                    <input type="text" id="lokasi" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Mis: Dekat Warung Robert Jr.">
+                    <label for="description" class="block text-sm font-medium text-gray-700">Keterangan</label>
+                    <textarea name="description" id="description" rows="3" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                            placeholder="Deskripsikan kondisi sampah..."></textarea>
                 </div>
                 
                 <div>
                     <label for="foto" class="block text-sm font-medium text-gray-700">Unggah Foto</label>
-                    <input type="file" id="foto" class="mt-1 block w-full text-sm text-gray-500
-                        file:mr-4 file:py-2 file:px-4
-                        file:rounded-full file:border-0
-                        file:bg-green-100 file:text-green-700 hover:file:bg-green-200"/>
+                    <input type="file" name="foto" id="foto" required
+                        class="mt-1 block w-full text-sm text-gray-500
+                            file:mr-4 file:py-2 file:px-4
+                            file:rounded-full file:border-0
+                            file:bg-green-100 file:text-green-700 hover:file:bg-green-200"/>
                 </div>
                 
                 <button type="submit" class="w-full bg-green-700 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-800">
