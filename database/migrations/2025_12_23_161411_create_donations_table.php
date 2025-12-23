@@ -12,13 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donations', function (Blueprint $table) {
-    $table->id();
-    $table->string('donor_name');
-    $table->integer('amount');
-    $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
-    $table->timestamps();
-});
-
+            $table->id();
+            $table->string('donor_name');
+            $table->integer('amount');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->timestamps();
+        });
     }
 
     /**
