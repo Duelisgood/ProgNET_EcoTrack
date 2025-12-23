@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    
+
                     <x-nav-link :href="url('/')" :active="request()->is('/')">
                         {{ __('Beranda') }}
                     </x-nav-link>
@@ -17,8 +17,20 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @auth
+                    @if(auth()->user()->role === 'admin')
+                    <x-nav-link
+                        :href="route('admin.donations.index')"
+                        :active="request()->routeIs('admin.donations.*')">
+                        Kelola Donasi
+                    </x-nav-link>
+                    @endif
+                    @endauth
+
                 </div>
             </div>
+
+
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -43,7 +55,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -65,7 +77,7 @@
 
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            
+
             <x-responsive-nav-link :href="url('/')" :active="request()->is('/')">
                 {{ __('Beranda') }}
             </x-responsive-nav-link>
@@ -90,7 +102,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
