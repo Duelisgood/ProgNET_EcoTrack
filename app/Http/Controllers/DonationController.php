@@ -16,15 +16,19 @@ class DonationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'donor_name' => 'required|string|max:100',
-            'amount' => 'required|numeric|min:1000',
+            'donor_name' => 'required|string|max:255',
+            'amount' => 'required|integer|min:1000',
+            'payment_method' => 'required|string',
         ]);
 
         Donation::create([
             'donor_name' => $request->donor_name,
             'amount' => $request->amount,
+            'payment_method' => $request->payment_method,
         ]);
 
-        return redirect()->back()->with('Donasi Terkirim! Terima kasih atas dukungan Anda.');
+        return redirect()
+            ->back()
+            ->with('success', 'Terima kasih atas donasi Anda');
     }
 }
