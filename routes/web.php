@@ -46,5 +46,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->name('admin.donations.index');
 });
 
+Route::delete('/lapor/{report}', [ReportController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('reports.destroy');
+
 
 require __DIR__.'/auth.php';
