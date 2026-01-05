@@ -63,14 +63,56 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Metode Pembayaran</label>
-                        <select name="payment_method" required class="w-full rounded-lg border-gray-300 focus:border-green-500 focus:ring-green-500">
-                            <option value="">-- Pilih Pembayaran --</option>
-                            <option value="transfer_bank">Transfer Bank (BCA/Mandiri)</option>
-                            <option value="qris">QRIS (Gopay/OVO/Dana)</option>
-                            <option value="kartu_kredit">Kartu Kredit</option>
-                        </select>
-                    </div>
+    <label class="block text-sm font-medium text-gray-700 mb-2">
+        Metode Pembayaran
+    </label>
+
+    <div class="grid grid-cols-2 gap-4">
+        
+        <!-- GoPay -->
+        <label class="cursor-pointer">
+            <input type="radio" name="payment_method" value="gopay" class="peer hidden" required>
+            <div class="border rounded-xl p-4 flex items-center justify-between
+                        peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-200">
+                <div class="flex items-center gap-2">
+                    <img src="{{ asset('img/gopay.jpg') }}" class="h-6" alt="GoPay">
+                    <span class="font-semibold">GoPay</span>
+                </div>
+            </div>
+        </label>
+
+        <!-- DANA -->
+        <label class="cursor-pointer">
+            <input type="radio" name="payment_method" value="dana" class="peer hidden">
+            <div class="border rounded-xl p-4 flex items-center justify-between
+                        peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-200">
+                        <img src="{{ asset('img/dana.jpg') }}" class="h-6" alt="DANA">
+                <span class="font-semibold">DANA</span>
+            </div>
+        </label>
+
+        <!-- OVO -->
+        <label class="cursor-pointer">
+            <input type="radio" name="payment_method" value="ovo" class="peer hidden">
+            <div class="border rounded-xl p-4 flex items-center justify-between
+                        peer-checked:border-purple-600 peer-checked:ring-2 peer-checked:ring-purple-200">
+                        <img src="{{ asset('img/logo ovo.jpg') }}" class="h-6" alt="OVO">
+                <span class="font-semibold">OVO</span>
+            </div>
+        </label>
+
+        <!-- QRIS -->
+        <label class="cursor-pointer">
+            <input type="radio" name="payment_method" value="qris" class="peer hidden">
+            <div class="border rounded-xl p-4 flex items-center justify-between
+                        peer-checked:border-green-600 peer-checked:ring-2 peer-checked:ring-green-200">
+                        <img src="{{ asset('img/qris.jpg') }}" class="h-6" alt="QRIS">
+                <span class="font-semibold">QRIS</span>
+            </div>
+        </label>
+
+    </div>
+</div>
 
                     <button
                         type="submit"

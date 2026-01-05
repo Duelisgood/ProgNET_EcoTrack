@@ -18,7 +18,7 @@ class DonationController extends Controller
         $request->validate([
             'donor_name' => 'required|string|max:255',
             'amount' => 'required|integer|min:1000',
-            'payment_method' => 'required|string',
+            'payment_method' => 'required|in:gopay,dana,ovo,qris',
         ]);
 
         Donation::create([
