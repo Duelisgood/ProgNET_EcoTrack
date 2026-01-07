@@ -74,9 +74,10 @@
             <input type="radio" name="payment_method" value="gopay" class="peer hidden" required>
             <div class="border rounded-xl p-4 flex items-center justify-between
                         peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-200">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-3">
                     <img src="{{ asset('img/gopay.jpg') }}" class="h-6" alt="GoPay">
                     <span class="font-semibold">GoPay</span>
+                    
                 </div>
             </div>
         </label>
