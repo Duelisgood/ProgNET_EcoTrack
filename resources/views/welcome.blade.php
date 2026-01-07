@@ -275,7 +275,7 @@
 </footer>
 
 <!-- POP UP-->
- <div id="report-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+<div id="report-modal" class="hidden fixed inset-0 z-[9999] flex items-center justify-center">
     
     <div id="modal-overlay" class="absolute inset-0 bg-black/60"></div>
     
