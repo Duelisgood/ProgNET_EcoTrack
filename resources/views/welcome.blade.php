@@ -324,10 +324,28 @@
         
     </div> </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="..." crossorigin=""></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
-</body>
+    @if(session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Ambil elemen modal & kontennya
+            const modal = document.getElementById('report-modal');
+            const formContent = document.getElementById('modal-form-content');
+            const successContent = document.getElementById('modal-success-content');
 
+            // 2. Tampilkan Modal Utama
+            modal.classList.remove('hidden');
+
+            // 3. Sembunyikan Formulir Input
+            formContent.classList.add('hidden');
+
+            // 4. Tampilkan Pesan Sukses
+            successContent.classList.remove('hidden');
+        });
+    </script>
+    @endif
+
+</body>
 </html>
